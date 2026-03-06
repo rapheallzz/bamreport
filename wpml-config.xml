@@ -1,0 +1,16 @@
+<wpml-config>
+    <admin-texts>
+        <key name="opt_name">
+            <key name="loading_text" />
+            <key name="top_bar_gmail" />
+            <key name="footer_desc" />
+            <key name="copyright_text" />
+            <key name="post_read_more" />
+            <key name="blog_title" />
+            <key name="search_title" />
+            <key name="title_not_found" />
+            <key name="content_not_found" />
+            <key name="button_not_found" />
+        </key>
+    </admin-texts>
+</wpml-config>

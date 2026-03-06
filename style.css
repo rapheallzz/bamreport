@@ -1,0 +1,109 @@
+/*
+Theme Name: Gunter
+Theme URI: https://themes.envytheme.com/gunter/
+Author: EnvyTheme
+Author URI: https://envytheme.com/
+Description: IT & Marketing Startup WordPress Theme
+Version: 4.7.1
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: gunter
+Tags: post-formats, custom-menu, editor-style, featured-images, threaded-comments, translation-ready, right-sidebar, sticky-post, rtl-language-support, blog
+
+/* -------------------------------------------------------------- */
+.alignnone {
+	display: block;
+	margin-bottom: 15px;
+	width: 100%;
+}
+.aligncenter, div.aligncenter {
+    display: block;
+    margin: 15px auto 15px auto;
+}
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.wp-caption {
+    max-width: 100%;
+}
+.wp-caption.alignnone {
+    margin: 15px auto 10px;
+}
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    width: auto;
+}
+.wp-caption p.wp-caption-text {
+    font-size: 13px;
+    line-height: 17px;
+    margin: 0;
+    padding: 0 4px 5px;
+}
+/* Text meant only for screen readers. */
+
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
+.screen-reader-text:focus {
+	background-color: #eee;
+	clip: auto !important;
+	clip-path: none;
+	color: #444;
+	display: block;
+	font-size: 1em;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000;
+	/* Above WP toolbar. */
+}
+.gallery-caption{z-index: 100000;}
+.bypostauthor{z-index: 100000;}
+
+.admin-bar .site-container {
+  	padding-top: 32px;
+}
