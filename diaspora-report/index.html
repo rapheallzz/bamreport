@@ -4,63 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Global Black Diaspora Report | Békwu Insights</title>
-    <link rel="stylesheet" href="assets/css/vendors.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/gunter-style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <style>
-        body { color: #333; }
-        .hero-section { padding: 120px 0 80px; background: #f9f9f9; }
-        .hero-label { font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #62618d; margin-bottom: 10px; display: block; }
-        .hero-title { font-size: 48px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
-        .hero-subtitle { font-size: 24px; color: #62618d; margin-bottom: 30px; }
-        .report-cover-placeholder { background: #ddd; height: 500px; display: flex; align-items: center; justify-content: center; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .section-padding { padding: 80px 0; }
-        .insight-card { background: #fff; padding: 30px; border: 1px solid #eee; height: 100%; transition: 0.3s; }
-        .insight-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.05); transform: translateY(-5px); }
-        .insight-card h4 { font-weight: 700; margin-bottom: 15px; }
-        .divider { height: 1px; background: #eee; margin: 40px 0; }
-        .sticky-download { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
-        .footer-line { padding: 40px 0; border-top: 1px solid #eee; text-align: center; color: #999; font-size: 14px; }
-        .about-section h3 { font-size: 18px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-        .logo-img { max-height: 60px; }
-        .nav-container { padding: 30px 0; position: absolute; top: 0; left: 0; right: 0; z-index: 100; }
-
-        /* Custom Button Styles for visibility */
-        .uk-button-primary-custom {
-            background-color: #000;
-            color: #fff;
-            border: 2px solid #000;
-        }
-        .uk-button-primary-custom:hover {
-            background-color: #333;
-            color: #fff;
-            border-color: #333;
-            text-decoration: none;
-        }
-        .uk-button-secondary-custom {
-            background-color: transparent;
-            color: #000;
-            border: 2px solid #000;
-        }
-        .uk-button-secondary-custom:hover {
-            background-color: #000;
-            color: #fff;
-            text-decoration: none;
-        }
-    </style>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- UIkit Framework (referenced from main assets) -->
+    <link rel="stylesheet" href="../assets/css/vendors.min.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <!-- Custom Dark Theme Styling -->
+    <link rel="stylesheet" href="custom.css">
 </head>
 <body>
 
 <div class="nav-container">
     <div class="uk-container">
-        <div class="uk-navbar">
-            <div class="uk-navbar-left">
-                <a href="#" class="uk-navbar-item uk-logo">
-                    <img src="assets/img/logo.png" alt="Black Audience Marketplace" class="logo-img">
-                </a>
-            </div>
+        <div class="uk-navbar-container uk-navbar-transparent">
+            <nav class="uk-navbar" data-uk-navbar>
+                <div class="uk-navbar-left">
+                    <a href="#" class="uk-navbar-item uk-logo">
+                        <img src="../assets/img/logo.png" alt="Black Audience Marketplace" class="logo-img">
+                    </a>
+                </div>
+            </nav>
         </div>
     </div>
 </div>
@@ -73,19 +36,19 @@
                 <span class="hero-label">Békwu Insights Report | 2026 Edition</span>
                 <h1 class="hero-title">The Global Black Diaspora</h1>
                 <p class="hero-subtitle">Culture, Streaming, and the New Attention Economy</p>
-                <p>A 59-page research report exploring how diaspora audiences influence global media consumption, streaming behavior, and cultural momentum across the United States, the Caribbean, Europe, and Africa.</p>
+                <p class="uk-text-large">A 59-page research report exploring how diaspora audiences influence global media consumption, streaming behavior, and cultural momentum across the United States, the Caribbean, Europe, and Africa.</p>
                 <p>Produced by Békwu Insights, the report examines how migration, identity, and digital platforms have created a cross-border ecosystem of cultural production and attention.</p>
 
                 <div class="uk-margin-large-top">
                     <button class="uk-button uk-button-primary-custom uk-button-large download-trigger">⬇ Download the Report</button>
-                    <a href="mailto:info@bekwuconsults.com" class="uk-button uk-button-secondary-custom uk-button-large uk-margin-small-left">Request an Executive Briefing</a>
+                    <a href="mailto:info@bekwuconsults.com" class="uk-button uk-button-secondary-custom uk-button-large uk-margin-small-left">Request Briefing</a>
                 </div>
             </div>
             <div class="uk-width-1-2@m">
                 <div class="report-cover-placeholder">
                     <div class="uk-text-center">
-                        <i class="fa fa-file-pdf-o fa-4x uk-margin-bottom"></i>
-                        <p class="uk-text-bold">REPORT COVER IMAGE</p>
+                        <i class="fa fa-file-pdf-o fa-4x uk-margin-bottom" style="color: #b07d10;"></i>
+                        <p class="uk-text-bold" style="color: #fff; text-transform: uppercase; letter-spacing: 2px;">Research Report</p>
                     </div>
                 </div>
             </div>
@@ -94,12 +57,13 @@
 </section>
 
 <!-- Why This Research Matters -->
-<section class="section-padding">
+<section class="section-padding bg-dark-alt">
     <div class="uk-container uk-container-small">
         <div class="uk-text-center uk-margin-large-bottom">
-            <h2 class="uk-heading-small">Why This Research Matters</h2>
+            <h2 class="uk-heading-small" style="color: #fff;">Why This Research Matters</h2>
+            <div style="height: 4px; width: 80px; background: #b07d10; margin: 20px auto;"></div>
         </div>
-        <div class="uk-column-1-1">
+        <div class="uk-column-1-1 uk-text-justify">
             <p>Global media companies operate within an attention economy where cultural influence moves rapidly across borders and platforms.</p>
             <p>Across music, streaming, film, and digital media, the global Black diaspora sits at the center of many of these cultural movements. Yet industry frameworks frequently treat Black audiences as a single demographic category rather than a global network shaped by migration, identity, and cross-border cultural exchange.</p>
             <p>This report expands that perspective by examining the diaspora as a transnational media ecosystem.</p>
@@ -109,11 +73,11 @@
 </section>
 
 <!-- What The Report Covers -->
-<section class="section-padding bg-gray">
+<section class="section-padding">
     <div class="uk-container">
         <div class="uk-grid uk-grid-large" data-uk-grid>
             <div class="uk-width-1-3@m">
-                <h2 class="uk-text-bold">What the Report Covers</h2>
+                <h2 class="uk-text-bold" style="color: #b07d10; text-transform: uppercase;">What the Report Covers</h2>
                 <p>Together these forces illustrate the emergence of what the report describes as a diaspora attention economy, where culture, technology, and audience behavior intersect across borders.</p>
             </div>
             <div class="uk-width-2-3@m">
@@ -131,36 +95,36 @@
 </section>
 
 <!-- Key Insights -->
-<section class="section-padding">
+<section class="section-padding bg-dark-alt">
     <div class="uk-container">
         <div class="uk-text-center uk-margin-large-bottom">
-            <h2 class="uk-heading-small">Key Insights</h2>
-            <p>The research identifies several structural shifts shaping the modern media landscape.</p>
+            <h2 class="uk-heading-small" style="color: #fff;">Key Insights</h2>
+            <p style="color: #a0a0a0;">The research identifies several structural shifts shaping the modern media landscape.</p>
         </div>
 
         <div class="uk-grid uk-grid-medium uk-child-width-1-2@s uk-child-width-1-4@m" data-uk-grid>
             <div>
                 <div class="insight-card">
-                    <h4>Diaspora audiences function as early adopters</h4>
+                    <h4>Early Adopters</h4>
                     <p>Communities with cross-border cultural exposure often discover and amplify emerging content formats before they scale to broader audiences.</p>
                 </div>
             </div>
             <div>
                 <div class="insight-card">
-                    <h4>YouTube increasingly operates as diaspora television</h4>
-                    <p>For many diaspora households, YouTube functions as a hybrid media network combining film libraries, commentary programming, faith broadcasting, and creator-led content.</p>
+                    <h4>Diaspora TV</h4>
+                    <p>For many diaspora households, YouTube functions as a hybrid media network combining film libraries, commentary programming, and creator-led content.</p>
                 </div>
             </div>
             <div>
                 <div class="insight-card">
-                    <h4>Cultural participation drives measurable economic activity</h4>
+                    <h4>Economic Impact</h4>
                     <p>Diaspora engagement generates significant economic impact through global music tours, cultural festivals, travel cycles, and creative industries.</p>
                 </div>
             </div>
             <div>
                 <div class="insight-card">
-                    <h4>Cross-border cultural flows accelerate content discovery</h4>
-                    <p>Media frequently circulates between the United States, the United Kingdom, Africa, and the Caribbean, creating a transnational ecosystem of storytelling and influence.</p>
+                    <h4>Content Discovery</h4>
+                    <p>Media frequently circulates between the US, UK, Africa, and Caribbean, creating a transnational ecosystem of storytelling and influence.</p>
                 </div>
             </div>
         </div>
@@ -168,35 +132,35 @@
 </section>
 
 <!-- About Sections -->
-<section class="section-padding bg-gray about-section">
+<section class="section-padding about-section">
     <div class="uk-container">
         <div class="uk-grid uk-grid-large" data-uk-grid>
             <div class="uk-width-1-2@m">
                 <h3>About Békwu Insights</h3>
                 <p>Békwu Consults is an audience intelligence advisory specializing in the Global Black Diaspora.</p>
-                <p>We analyze how Black audiences across the United States and international markets — including African, Caribbean, and cross-border communities — influence media systems, accelerate cultural trends, and generate measurable economic impact.</p>
+                <p>We analyze how Black audiences across international markets influence media systems, accelerate cultural trends, and generate measurable economic impact.</p>
                 <p>Our work focuses on uncovering structural misclassification in media planning and identifying high-efficiency capital allocation opportunities.</p>
-                <p>We translate Black audience intelligence into strategic growth opportunities for media companies, platforms, and brands.</p>
-                <p class="uk-text-bold uk-margin-top">For inquiries: info@bekwuconsults.com</p>
+                <p class="uk-text-bold" style="color: #b07d10; margin-top: 30px;">Inquiries: info@bekwuconsults.com</p>
             </div>
             <div class="uk-width-1-2@m">
-                <div class="uk-hidden@m divider"></div>
-                <h3>About Black Audience Marketplace (BAM)</h3>
+                <div class="uk-hidden@m uk-margin-large-top"></div>
+                <h3>About BAM</h3>
                 <p>Black Audience Marketplace (BAM) is a platform designed to connect brands, platforms, and media partners with global Black and diaspora audiences across streaming and digital media environments.</p>
-                <p>Insights developed through Békwu research inform BAM’s approach to audience strategy, helping advertisers activate against one of the most culturally influential audiences in the modern media ecosystem.</p>
+                <p>Insights developed through Békwu research inform BAM’s approach to audience strategy, helping advertisers activate against culturally influential audiences.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Call to Action -->
-<section class="section-padding uk-text-center">
+<section class="section-padding bg-dark-alt uk-text-center">
     <div class="uk-container uk-container-small">
-        <h2 class="uk-margin-bottom">Ready to explore the diaspora attention economy?</h2>
-        <button class="uk-button uk-button-primary-custom uk-button-large download-trigger">⬇ Download the Full Report</button>
+        <h2 class="uk-margin-bottom" style="color: #fff;">Download the Full Report</h2>
+        <p class="uk-margin-medium-bottom">Access 59 pages of research and data on the global Black diaspora media landscape.</p>
+        <button class="uk-button uk-button-primary-custom uk-button-large download-trigger">⬇ Download Now</button>
         <div class="uk-margin-large-top">
-            <p>For speaking engagements, executive briefings, or research inquiries:</p>
-            <p class="uk-text-large uk-text-bold">info@bekwuconsults.com</p>
+            <p style="color: #666;">For speaking engagements or research inquiries:</p>
+            <p class="uk-text-large uk-text-bold" style="color: #b07d10;">info@bekwuconsults.com</p>
         </div>
     </div>
 </section>
@@ -204,43 +168,49 @@
 <!-- Footer -->
 <footer class="footer-line">
     <div class="uk-container">
-        <p>Békwu Insights Report | 2026 Edition</p>
+        <p>Békwu Insights Report | 2026 Edition | Developed for BAM</p>
     </div>
 </footer>
 
 <!-- Sticky Download Button -->
 <div class="sticky-download">
-    <button class="uk-button uk-button-primary-custom download-trigger" style="box-shadow: 0 10px 20px rgba(0,0,0,0.1);">Download Report</button>
+    <button class="uk-button uk-button-primary-custom download-trigger">Download Report</button>
 </div>
 
 <!-- Modal Popup -->
 <div id="download-modal" data-uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
-        <button class="uk-modal-close-default" type="button" data-uk-close></button>
+        <button class="uk-modal-close-default" type="button" data-uk-close style="color: #fff;"></button>
         <h2 class="uk-modal-title">Download the Report</h2>
-        <p>Join media leaders exploring the Global Black Diaspora attention economy.</p>
-        <p class="uk-text-small uk-text-muted">Please enter your information below to access<br><strong>The Global Black Diaspora: Culture, Streaming, and the New Attention Economy.</strong></p>
+        <p style="color: #a0a0a0;">Join media leaders exploring the Global Black Diaspora attention economy.</p>
+        <div style="border: 1px solid #333; padding: 20px; margin-bottom: 30px;">
+            <p class="uk-text-small" style="margin-bottom: 0;">Access: <strong>The Global Black Diaspora: Culture, Streaming, and the New Attention Economy.</strong></p>
+        </div>
 
         <form id="download-form" class="uk-form-stacked">
-            <div class="uk-margin-small">
-                <label class="uk-form-label">First Name *</label>
-                <input class="uk-input" type="text" name="firstName" required>
-            </div>
-            <div class="uk-margin-small">
-                <label class="uk-form-label">Last Name *</label>
-                <input class="uk-input" type="text" name="lastName" required>
+            <div class="uk-grid-small uk-child-width-1-2@s" data-uk-grid>
+                <div>
+                    <label class="uk-form-label">First Name *</label>
+                    <input class="uk-input" type="text" name="firstName" required>
+                </div>
+                <div>
+                    <label class="uk-form-label">Last Name *</label>
+                    <input class="uk-input" type="text" name="lastName" required>
+                </div>
             </div>
             <div class="uk-margin-small">
                 <label class="uk-form-label">Email Address *</label>
                 <input class="uk-input" type="email" name="email" required>
             </div>
-            <div class="uk-margin-small">
-                <label class="uk-form-label">Company / Organization</label>
-                <input class="uk-input" type="text" name="company">
-            </div>
-            <div class="uk-margin-small">
-                <label class="uk-form-label">Role / Title</label>
-                <input class="uk-input" type="text" name="role">
+            <div class="uk-grid-small uk-child-width-1-2@s" data-uk-grid>
+                <div>
+                    <label class="uk-form-label">Company</label>
+                    <input class="uk-input" type="text" name="company">
+                </div>
+                <div>
+                    <label class="uk-form-label">Role / Title</label>
+                    <input class="uk-input" type="text" name="role">
+                </div>
             </div>
             <div class="uk-margin-small">
                 <label class="uk-form-label">Industry</label>
@@ -271,36 +241,37 @@
                 </select>
             </div>
 
-            <div class="uk-margin-top">
+            <div class="uk-margin-large-top">
                 <button type="submit" class="uk-button uk-button-primary-custom uk-width-1-1">Access Report</button>
             </div>
 
-            <p class="uk-text-small uk-text-muted uk-margin-top">Your information will only be used for research updates and insights from Békwu Consults.</p>
+            <p class="uk-text-small uk-text-muted uk-margin-top uk-text-center">Your information will only be used for research updates and insights from Békwu Consults.</p>
         </form>
 
         <div id="thank-you-message" style="display:none;" class="uk-text-center uk-padding">
-            <h3 class="uk-text-success">Thank you for your interest in the research.</h3>
-            <p>Your download will begin shortly.</p>
-            <p class="uk-text-small">If it doesn't start automatically, <a href="#" id="manual-download">click here</a>.</p>
+            <div class="uk-margin-medium-bottom">
+                <i class="fa fa-check-circle fa-4x" style="color: #b07d10;"></i>
+            </div>
+            <h3 style="color: #fff;">Thank You.</h3>
+            <p>Your research download will begin shortly.</p>
+            <p class="uk-text-small" style="color: #666;">Check your downloads folder or <a href="#" id="manual-download" style="color: #b07d10;">click here</a>.</p>
         </div>
     </div>
 </div>
 
-<script src="assets/js/vendors.min.js"></script>
+<script src="../assets/js/vendors.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const modal = UIkit.modal('#download-modal');
         const form = document.getElementById('download-form');
         const thankYou = document.getElementById('thank-you-message');
 
-        // Open modal on download button click
         document.querySelectorAll('.download-trigger').forEach(btn => {
             btn.addEventListener('click', () => {
                 modal.show();
             });
         });
 
-        // Handle form submission
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -308,20 +279,16 @@
             const data = Object.fromEntries(formData.entries());
             data.timestamp = new Date().toISOString();
 
-            // Data Collection - store in localStorage
             let submissions = JSON.parse(localStorage.getItem('report_submissions') || '[]');
             submissions.push(data);
             localStorage.setItem('report_submissions', JSON.stringify(submissions));
 
-            // Show thank you message
             form.style.display = 'none';
             thankYou.style.display = 'block';
 
-            // preferred automatic download
             triggerDownload();
         });
 
-        // Reset form when modal is closed
         UIkit.util.on('#download-modal', 'hide', () => {
             if (form.style.display === 'none') {
                 setTimeout(() => {
@@ -333,12 +300,11 @@
         });
 
         function triggerDownload() {
-            // Placeholder download trigger
-            const blob = new Blob(["Placeholder PDF Content for Global Black Diaspora Report"], { type: "application/pdf" });
+            const blob = new Blob(["Global Black Diaspora Report 2026 - Executive Insights"], { type: "application/pdf" });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "Global_Black_Diaspora_Report_2026.pdf";
+            a.download = "BAM_Global_Black_Diaspora_Report_2026.pdf";
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
@@ -350,34 +316,16 @@
             triggerDownload();
         });
 
-        // Admin function to export CSV (can be triggered via console for now)
         window.exportSubmissions = function() {
             const submissions = JSON.parse(localStorage.getItem('report_submissions') || '[]');
-            if (submissions.length === 0) {
-                console.log("No submissions yet.");
-                return;
-            }
-
+            if (submissions.length === 0) return;
             const headers = Object.keys(submissions[0]);
-            const csvRows = [headers.join(',')];
-
-            for (const sub of submissions) {
-                const values = headers.map(header => {
-                    const val = sub[header] || '';
-                    return `"${val.toString().replace(/"/g, '""')}"`;
-                });
-                csvRows.push(values.join(','));
-            }
-
-            const csvContent = csvRows.join('\n');
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = window.URL.createObjectURL(blob);
+            const csvContent = [headers.join(','), ...submissions.map(s => headers.map(h => `"${(s[h] || '').replace(/"/g, '""')}"`).join(','))].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
             const link = document.createElement("a");
-            link.setAttribute("href", url);
-            link.setAttribute("download", "report_submissions.csv");
-            document.body.appendChild(link);
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "diaspora_report_leads.csv";
             link.click();
-            document.body.removeChild(link);
         };
     });
 </script>
