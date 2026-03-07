@@ -59,7 +59,7 @@
 
                 <div class="uk-margin-large-top">
                     <button class="uk-button uk-button-primary-custom uk-button-large download-trigger">⬇ Download the Report</button>
-                    <a href="mailto:info@bekwuconsults.com" class="uk-button uk-button-secondary-custom uk-button-large uk-margin-small-left">Request Briefing</a>
+                    <button class="uk-button uk-button-secondary-custom uk-button-large uk-margin-small-left briefing-trigger">Request Briefing</button>
                 </div>
             </div>
             <div class="uk-width-1-2@m">
@@ -274,6 +274,85 @@
     </div>
 </div>
 
+<!-- Briefing Modal -->
+<div id="briefing-modal" data-uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" data-uk-close style="color: #fff;"></button>
+        <h2 class="uk-modal-title">Request an Executive Briefing</h2>
+        <p style="color: #a0a0a0;">Schedule a research briefing or strategy discussion based on insights from <strong>The Global Black Diaspora: Culture, Streaming, and the New Attention Economy.</strong></p>
+
+        <form id="briefing-form" class="uk-form-stacked uk-margin-top">
+            <div class="uk-grid-small uk-child-width-1-2@s" data-uk-grid>
+                <div>
+                    <label class="uk-form-label">First Name *</label>
+                    <input class="uk-input" type="text" name="firstName" required>
+                </div>
+                <div>
+                    <label class="uk-form-label">Last Name *</label>
+                    <input class="uk-input" type="text" name="lastName" required>
+                </div>
+            </div>
+            <div class="uk-margin-small">
+                <label class="uk-form-label">Email Address *</label>
+                <input class="uk-input" type="email" name="email" required>
+            </div>
+            <div class="uk-grid-small uk-child-width-1-2@s" data-uk-grid>
+                <div>
+                    <label class="uk-form-label">Company / Organization</label>
+                    <input class="uk-input" type="text" name="company">
+                </div>
+                <div>
+                    <label class="uk-form-label">Role / Title</label>
+                    <input class="uk-input" type="text" name="role">
+                </div>
+            </div>
+            <div class="uk-margin-small">
+                <label class="uk-form-label">Organization Type</label>
+                <select class="uk-select" name="orgType">
+                    <option value="">Select type...</option>
+                    <option>Brand / Advertiser</option>
+                    <option>Media Company / Network</option>
+                    <option>Streaming Platform</option>
+                    <option>Advertising Agency</option>
+                    <option>Investment / Finance</option>
+                    <option>Research / Analytics</option>
+                    <option>Production Company / Studio</option>
+                    <option>Independent Creator</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="uk-margin-small">
+                <label class="uk-form-label">Type of Inquiry</label>
+                <select class="uk-select" name="inquiryType">
+                    <option value="">Select inquiry...</option>
+                    <option>Executive briefing on the report</option>
+                    <option>Strategy discussion</option>
+                    <option>Speaking engagement</option>
+                    <option>Research collaboration</option>
+                    <option>Consulting inquiry</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="uk-margin-small">
+                <label class="uk-form-label">Tell us briefly about your interest.</label>
+                <textarea class="uk-textarea" rows="3" name="message" placeholder="Your message..."></textarea>
+            </div>
+
+            <div class="uk-margin-large-top">
+                <button type="submit" class="uk-button uk-button-primary-custom uk-width-1-1">Submit Request</button>
+            </div>
+        </form>
+
+        <div id="briefing-thank-you" style="display:none;" class="uk-text-center uk-padding">
+            <div class="uk-margin-medium-bottom">
+                <i class="fa fa-check-circle fa-4x" style="color: #b07d10;"></i>
+            </div>
+            <h3 style="color: #fff;">Request Received.</h3>
+            <p>Thank you for your interest. A member of our team will be in touch shortly.</p>
+        </div>
+    </div>
+</div>
+
 <script src="assets/js/vendors.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -281,26 +360,39 @@
         // Replace this with your Google Apps Script Web App URL after deployment
         const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
-        const modal = UIkit.modal('#download-modal');
-        const form = document.getElementById('download-form');
-        const thankYou = document.getElementById('thank-you-message');
-        const submitBtn = form.querySelector('button[type="submit"]');
+        const downloadModal = UIkit.modal('#download-modal');
+        const downloadForm = document.getElementById('download-form');
+        const downloadThankYou = document.getElementById('thank-you-message');
+        const downloadSubmitBtn = downloadForm.querySelector('button[type="submit"]');
+
+        const briefingModal = UIkit.modal('#briefing-modal');
+        const briefingForm = document.getElementById('briefing-form');
+        const briefingThankYou = document.getElementById('briefing-thank-you');
+        const briefingSubmitBtn = briefingForm.querySelector('button[type="submit"]');
 
         document.querySelectorAll('.download-trigger').forEach(btn => {
             btn.addEventListener('click', () => {
-                modal.show();
+                downloadModal.show();
             });
         });
 
-        form.addEventListener('submit', function(e) {
+        document.querySelectorAll('.briefing-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                briefingModal.show();
+            });
+        });
+
+        // Download Form Handler
+        downloadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Processing...';
+            downloadSubmitBtn.disabled = true;
+            downloadSubmitBtn.innerText = 'Processing...';
 
-            const formData = new FormData(form);
+            const formData = new FormData(downloadForm);
             const data = Object.fromEntries(formData.entries());
             data.timestamp = new Date().toISOString();
+            data.type = "download";
 
             // 1. Local storage backup
             let submissions = JSON.parse(localStorage.getItem('report_submissions') || '[]');
@@ -308,9 +400,39 @@
             localStorage.setItem('report_submissions', JSON.stringify(submissions));
 
             // 2. Submit to Google Apps Script
+            submitToGAS(data, () => {
+                downloadForm.style.display = 'none';
+                downloadThankYou.style.display = 'block';
+                triggerDownload();
+            });
+        });
+
+        // Briefing Form Handler
+        briefingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            briefingSubmitBtn.disabled = true;
+            briefingSubmitBtn.innerText = 'Sending...';
+
+            const formData = new FormData(briefingForm);
+            const data = Object.fromEntries(formData.entries());
+            data.timestamp = new Date().toISOString();
+            data.type = "briefing";
+
+            // 1. Local storage backup
+            let requests = JSON.parse(localStorage.getItem('briefing_requests') || '[]');
+            requests.push(data);
+            localStorage.setItem('briefing_requests', JSON.stringify(requests));
+
+            // 2. Submit to Google Apps Script
+            submitToGAS(data, () => {
+                briefingForm.style.display = 'none';
+                briefingThankYou.style.display = 'block';
+            });
+        });
+
+        function submitToGAS(data, callback) {
             if (SCRIPT_URL && SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-                // We use a simple fetch. mode: 'no-cors' is used to avoid CORS preflight
-                // issues with Google Apps Script while still sending the data.
                 fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -321,32 +443,36 @@
                     body: JSON.stringify(data),
                 }).then(() => {
                     console.log('Submitted to Google Sheets');
-                    showSuccess();
+                    callback();
                 }).catch(err => {
                     console.error('Error submitting to GAS:', err);
-                    // Still show success to user so they can get the report
-                    showSuccess();
+                    callback();
                 });
             } else {
-                // Fallback if URL is not set
-                showSuccess();
+                callback();
             }
-        });
-
-        function showSuccess() {
-            form.style.display = 'none';
-            thankYou.style.display = 'block';
-            triggerDownload();
         }
 
         UIkit.util.on('#download-modal', 'hide', () => {
-            if (form.style.display === 'none') {
+            if (downloadForm.style.display === 'none') {
                 setTimeout(() => {
-                    form.reset();
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = 'Access Report';
-                    form.style.display = 'block';
-                    thankYou.style.display = 'none';
+                    downloadForm.reset();
+                    downloadSubmitBtn.disabled = false;
+                    downloadSubmitBtn.innerText = 'Access Report';
+                    downloadForm.style.display = 'block';
+                    downloadThankYou.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        UIkit.util.on('#briefing-modal', 'hide', () => {
+            if (briefingForm.style.display === 'none') {
+                setTimeout(() => {
+                    briefingForm.reset();
+                    briefingSubmitBtn.disabled = false;
+                    briefingSubmitBtn.innerText = 'Submit Request';
+                    briefingForm.style.display = 'block';
+                    briefingThankYou.style.display = 'none';
                 }, 500);
             }
         });

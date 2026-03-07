@@ -37,33 +37,57 @@ function doPost(e) {
     }
 
     // Append the user data
-    sheet.appendRow([
-      data.timestamp,
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.company,
-      data.role,
-      data.industry,
-      data.interest
-    ]);
+    if (data.type === "briefing") {
+      sheet.appendRow([
+        data.timestamp,
+        data.firstName,
+        data.lastName,
+        data.email,
+        data.company,
+        data.role,
+        "BRIEFING REQUEST",
+        data.inquiryType,
+        data.orgType,
+        data.message
+      ]);
+    } else {
+      sheet.appendRow([
+        data.timestamp,
+        data.firstName,
+        data.lastName,
+        data.email,
+        data.company,
+        data.role,
+        data.industry,
+        data.interest
+      ]);
+    }
 
     // 2. Send Email Notification
-    var recipient = "bamreport@blackaudiencemarketplace.com";
-    var subject = "New Report Download: " + data.firstName + " " + data.lastName;
+    var recipient = "sales@blackaudiencemarketplace.com";
+    var isBriefing = data.type === "briefing";
+    var subject = (isBriefing ? "Briefing Request: " : "New Report Download: ") + data.firstName + " " + data.lastName;
 
-    var body = "A new user has downloaded the Global Black Diaspora Report.\n\n" +
+    var body = (isBriefing ? "A new executive briefing request has been submitted." : "A new user has downloaded the Global Black Diaspora Report.") + "\n\n" +
                "Details:\n" +
                "----------------------------------\n" +
                "Name: " + data.firstName + " " + data.lastName + "\n" +
                "Email: " + data.email + "\n" +
                "Company: " + (data.company || "N/A") + "\n" +
-               "Role: " + (data.role || "N/A") + "\n" +
-               "Industry: " + (data.industry || "N/A") + "\n" +
-               "Area of Interest: " + (data.interest || "N/A") + "\n" +
-               "Timestamp: " + data.timestamp + "\n" +
-               "----------------------------------\n\n" +
-               "This data has been added to your Google Spreadsheet.";
+               "Role: " + (data.role || "N/A") + "\n";
+
+    if (isBriefing) {
+      body += "Organization Type: " + (data.orgType || "N/A") + "\n" +
+              "Type of Inquiry: " + (data.inquiryType || "N/A") + "\n" +
+              "Message: " + (data.message || "N/A") + "\n";
+    } else {
+      body += "Industry: " + (data.industry || "N/A") + "\n" +
+              "Area of Interest: " + (data.interest || "N/A") + "\n";
+    }
+
+    body += "Timestamp: " + data.timestamp + "\n" +
+            "----------------------------------\n\n" +
+            "This data has been added to your Google Spreadsheet.";
 
     MailApp.sendEmail(recipient, subject, body);
 
