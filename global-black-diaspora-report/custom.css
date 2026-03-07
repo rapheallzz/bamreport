@@ -193,6 +193,7 @@ body {
     border-bottom: 2px solid var(--accent-gold);
     display: inline-block;
     padding-bottom: 5px;
+    margin-top: 0;
     margin-bottom: 30px;
 }
 
