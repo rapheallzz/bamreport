@@ -46,15 +46,21 @@ body {
     padding-left: 20px;
 }
 
-.report-cover-placeholder {
+.report-cover-container {
     background: #111;
     border: 2px solid var(--accent-gold);
-    height: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0; /* Rectangular as requested */
+    border-radius: 0;
     box-shadow: 0 0 30px rgba(176, 125, 16, 0.2);
+    overflow: hidden;
+}
+
+.report-cover-img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .section-padding {

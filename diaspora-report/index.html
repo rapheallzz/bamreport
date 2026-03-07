@@ -45,11 +45,8 @@
                 </div>
             </div>
             <div class="uk-width-1-2@m">
-                <div class="report-cover-placeholder">
-                    <div class="uk-text-center">
-                        <i class="fa fa-file-pdf-o fa-4x uk-margin-bottom" style="color: #b07d10;"></i>
-                        <p class="uk-text-bold" style="color: #fff; text-transform: uppercase; letter-spacing: 2px;">Research Report</p>
-                    </div>
+                <div class="report-cover-container">
+                    <img src="assets/img/cover.png" alt="Global Black Diaspora Report Cover" class="report-cover-img">
                 </div>
             </div>
         </div>
@@ -300,14 +297,11 @@
         });
 
         function triggerDownload() {
-            const blob = new Blob(["Global Black Diaspora Report 2026 - Executive Insights"], { type: "application/pdf" });
-            const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
-            a.href = url;
-            a.download = "BAM_Global_Black_Diaspora_Report_2026.pdf";
+            a.href = "assets/img/The Global Black Diaspora Report 2026 Edition.pdf";
+            a.download = "The Global Black Diaspora Report 2026 Edition.pdf";
             document.body.appendChild(a);
             a.click();
-            window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
         }
 
