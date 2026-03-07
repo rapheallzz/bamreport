@@ -5,7 +5,7 @@
 
 if ( ! function_exists( 'gunter_custom_css' ) ) {
     function gunter_custom_css(){
-        wp_enqueue_style('gunter_custom_style', get_template_directory_uri() . '/diaspora-report/assets/css/custom-style.css');
+        wp_enqueue_style('gunter_custom_style', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/custom-style.css');
         global $opt_name;
                 
                 if(isset($opt_name['theme_color'] )){
@@ -172,7 +172,7 @@ if ( ! function_exists( 'gunter_custom_css' ) ) {
 
                 // Pre-loader image
                 $is_preloader       = !empty($opt_name['enable_preloader']) ? $opt_name['enable_preloader'] : '';
-                $preloader_image = isset( $opt_name['preloader_image']['url'] ) ? $opt_name['preloader_image']['url'] : get_template_directory_uri() . '/diaspora-report/assets/img' .'/status.gif';
+                $preloader_image = isset( $opt_name['preloader_image']['url'] ) ? $opt_name['preloader_image']['url'] : get_template_directory_uri() . '/global-black-diaspora-report/assets/img' .'/status.gif';
                 $preloader_style = !empty( $opt_name['preloader_style'] ) ? $opt_name['preloader_style'] : 'text';
                 if ( $preloader_style == 'image' && $is_preloader == '1' ) {
                     $custom_css .= "
@@ -192,7 +192,7 @@ if ( ! function_exists( 'gunter_custom_css' ) ) {
                 wp_add_inline_style('gunter_custom_style', $custom_css);
 
                 // Custom Js
-                wp_enqueue_script( 'gunter-custom-script', get_template_directory_uri() . '/diaspora-report/assets/js/gunter-custom-script.js', array( 'jquery' ), false, true );
+                wp_enqueue_script( 'gunter-custom-script', get_template_directory_uri() . '/global-black-diaspora-report/assets/js/gunter-custom-script.js', array( 'jquery' ), false, true );
                 $custom_script ='';
                 if( isset($opt_name['js_code'] )){
                     $custom_script .= $opt_name['js_code'];

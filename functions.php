@@ -105,17 +105,17 @@ if ( ! function_exists( 'gunter_scripts' ) ) {
 		wp_enqueue_style( 'gunter-style', get_stylesheet_uri() );
 		wp_style_add_data( 'gunter-style', 'rtl', 'replace' );
 
-		wp_enqueue_style( 'vendors', get_template_directory_uri() . '/diaspora-report/assets/css/vendors.min.css' );
+		wp_enqueue_style( 'vendors', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/vendors.min.css' );
 
-		wp_enqueue_style( 'font-awesome-min', get_template_directory_uri() . '/diaspora-report/assets/css/font-awesome.min.css');
-		wp_enqueue_style( 'flaticon', get_template_directory_uri() . '/diaspora-report/assets/css/flaticon.css');
+		wp_enqueue_style( 'font-awesome-min', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/font-awesome.min.css');
+		wp_enqueue_style( 'flaticon', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/flaticon.css');
 
 		if( $is_minify == true ):
-			wp_enqueue_style( 'gunter-main-style', get_template_directory_uri() . '/diaspora-report/assets/css/gunter-style.min.css');
-			wp_enqueue_style( 'gunter-responsive', get_template_directory_uri() . '/diaspora-report/assets/css/responsive.min.css');
+			wp_enqueue_style( 'gunter-main-style', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/gunter-style.min.css');
+			wp_enqueue_style( 'gunter-responsive', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/responsive.min.css');
 		else :
-			wp_enqueue_style( 'gunter-main-style', get_template_directory_uri() . '/diaspora-report/assets/css/gunter-style.css');
-			wp_enqueue_style( 'gunter-responsive', get_template_directory_uri() . '/diaspora-report/assets/css/responsive.css');
+			wp_enqueue_style( 'gunter-main-style', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/gunter-style.css');
+			wp_enqueue_style( 'gunter-responsive', get_template_directory_uri() . '/global-black-diaspora-report/assets/css/responsive.css');
 		endif;
 
 		// RTL CSS
@@ -123,19 +123,19 @@ if ( ! function_exists( 'gunter_scripts' ) ) {
 			wp_enqueue_style( 'gunter-rtl', get_template_directory_uri() . '/style-rtl.css' );
 		endif;
 
-		wp_enqueue_script( 'vendors', get_template_directory_uri() . '/diaspora-report/assets/js/vendors.min.js', array ( 'jquery' ), true);
-		wp_enqueue_script( 'jquery-ajaxchimp', get_template_directory_uri() . '/diaspora-report/assets/js/jquery.ajaxchimp.min.js', array ( 'jquery' ), true);
+		wp_enqueue_script( 'vendors', get_template_directory_uri() . '/global-black-diaspora-report/assets/js/vendors.min.js', array ( 'jquery' ), true);
+		wp_enqueue_script( 'jquery-ajaxchimp', get_template_directory_uri() . '/global-black-diaspora-report/assets/js/jquery.ajaxchimp.min.js', array ( 'jquery' ), true);
 
 		// Smartify JS 
 		if( $is_lazyloader == true ):
-			wp_enqueue_script( 'jquery-smartify', get_template_directory_uri() . '/diaspora-report/assets/js/jquery.smartify.js', array( 'jquery' ), false, true );
-			wp_enqueue_script( 'gunter-smartify', get_template_directory_uri() . '/diaspora-report/assets/js/smartify.js', array( 'jquery' ), false, true );
+			wp_enqueue_script( 'jquery-smartify', get_template_directory_uri() . '/global-black-diaspora-report/assets/js/jquery.smartify.js', array( 'jquery' ), false, true );
+			wp_enqueue_script( 'gunter-smartify', get_template_directory_uri() . '/global-black-diaspora-report/assets/js/smartify.js', array( 'jquery' ), false, true );
 		endif;
 
 		if( $is_minify == true ):
-			wp_enqueue_script( 'gunter-active', get_template_directory_uri() . '/diaspora-report/assets/js/active.min.js', array( 'jquery' ), false, true );
+			wp_enqueue_script( 'gunter-active', get_template_directory_uri() . '/global-black-diaspora-report/assets/js/active.min.js', array( 'jquery' ), false, true );
 		else :
-			wp_enqueue_script( 'gunter-active', get_template_directory_uri() . '/diaspora-report/assets/js/active.js', array( 'jquery' ), false, true );
+			wp_enqueue_script( 'gunter-active', get_template_directory_uri() . '/global-black-diaspora-report/assets/js/active.js', array( 'jquery' ), false, true );
 		endif;
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -347,9 +347,9 @@ require get_template_directory() . '/inc/admin/dashboard/Gunter_admin_dashboard.
  */
 add_action( 'admin_enqueue_scripts', function() {
     global $pagenow;
-    wp_enqueue_script( 'gunter-admin', get_template_directory_uri() .'/diaspora-report/assets/js/gunter-admin.js', array('jquery'), '1.0.0', true );
+    wp_enqueue_script( 'gunter-admin', get_template_directory_uri() .'/global-black-diaspora-report/assets/js/gunter-admin.js', array('jquery'), '1.0.0', true );
     if ( $pagenow == 'admin.php' ) {
-        wp_enqueue_style( 'gunter-admin-dashboard', get_template_directory_uri() .'/diaspora-report/assets/css/admin-dashboard.min.css' );
+        wp_enqueue_style( 'gunter-admin-dashboard', get_template_directory_uri() .'/global-black-diaspora-report/assets/css/admin-dashboard.min.css' );
     }
 });
 

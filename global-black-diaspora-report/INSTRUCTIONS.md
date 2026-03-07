@@ -5,7 +5,7 @@ To enable the lead capture form to automatically update your Google Spreadsheet 
 ### 1. Deploy the Google Apps Script
 1.  Open your [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1x3L5e7GAMfYcCRRoILDKmZlwxjAf0oV2nL_mXhdcRnU/edit).
 2.  In the top menu, go to **Extensions** > **Apps Script**.
-3.  Delete any code in the editor and paste the contents of `diaspora-report/google-apps-script.gs`.
+3.  Delete any code in the editor and paste the contents of `global-black-diaspora-report/google-apps-script.gs`.
 4.  Click the **Save** (disk icon) and name the project "Report Lead Handler".
 5.  Click the blue **Deploy** button > **New Deployment**.
 6.  Select **Web App** as the "Select type" (cog icon).
@@ -18,7 +18,7 @@ To enable the lead capture form to automatically update your Google Spreadsheet 
 10. Once deployed, you will see a **Web App URL**. **Copy this URL**.
 
 ### 2. Connect the Landing Page
-1.  Open `diaspora-report/index.html`.
+1.  Open `global-black-diaspora-report/index.html`.
 2.  Scroll down to the `<script>` section (around line 262).
 3.  Find the line: `const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';`
 4.  Replace `'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'` with the **Web App URL** you copied in the previous step.

@@ -70,7 +70,7 @@ class Gunter_admin_page extends Gunter_base {
 				$this->capability,
 				$this->id,
 				array( $this, 'display' ),
-				get_template_directory_uri() . '/diaspora-report/assets/img/favicon-lock.png',
+				get_template_directory_uri() . '/global-black-diaspora-report/assets/img/favicon-lock.png',
 				$this->position
 			);
 		}
