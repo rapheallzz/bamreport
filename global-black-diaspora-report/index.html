@@ -155,7 +155,7 @@
                 <p>Békwu Consults is an audience intelligence advisory specializing in the Global Black Diaspora.</p>
                 <p>We analyze how Black audiences across international markets influence media systems, accelerate cultural trends, and generate measurable economic impact.</p>
                 <p>Our work focuses on uncovering structural misclassification in media planning and identifying high-efficiency capital allocation opportunities.</p>
-                <p class="uk-text-bold" style="color: #b07d10; margin-top: 30px;">Inquiries: info@bekwuconsults.com</p>
+                <p class="uk-text-bold" style="color: #b07d10; margin-top: 30px; ">Inquiries: info@bekwuconsults.com</p>
             </div>
             <div class="uk-width-1-2@m" style="border-left: 1px solid #333;">
                 <div class="uk-hidden@m uk-margin-large-top"></div>
@@ -358,7 +358,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // --- Configuration ---
         // Replace this with your Google Apps Script Web App URL after deployment
-        const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLFS5KUUReSXVdp_wSKkfkATNkLWhsENxJJ19Gk12HDUkSKc1LIdhshVKpO5A-52uZrA/exec';
 
         const downloadModal = UIkit.modal('#download-modal');
         const downloadForm = document.getElementById('download-form');
@@ -432,7 +432,7 @@
         });
 
         function submitToGAS(data, callback) {
-            if (SCRIPT_URL && SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+            if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbyLFS5KUUReSXVdp_wSKkfkATNkLWhsENxJJ19Gk12HDUkSKc1LIdhshVKpO5A-52uZrA/exec') {
                 fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
