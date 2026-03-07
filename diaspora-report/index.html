@@ -259,9 +259,14 @@
 <script src="assets/js/vendors.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // --- Configuration ---
+        // Replace this with your Google Apps Script Web App URL after deployment
+        const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
         const modal = UIkit.modal('#download-modal');
         const form = document.getElementById('download-form');
         const thankYou = document.getElementById('thank-you-message');
+        const submitBtn = form.querySelector('button[type="submit"]');
 
         document.querySelectorAll('.download-trigger').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -272,24 +277,56 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Processing...';
+
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             data.timestamp = new Date().toISOString();
 
+            // 1. Local storage backup
             let submissions = JSON.parse(localStorage.getItem('report_submissions') || '[]');
             submissions.push(data);
             localStorage.setItem('report_submissions', JSON.stringify(submissions));
 
+            // 2. Submit to Google Apps Script
+            if (SCRIPT_URL && SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                // We use a simple fetch. mode: 'no-cors' is used to avoid CORS preflight
+                // issues with Google Apps Script while still sending the data.
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }).then(() => {
+                    console.log('Submitted to Google Sheets');
+                    showSuccess();
+                }).catch(err => {
+                    console.error('Error submitting to GAS:', err);
+                    // Still show success to user so they can get the report
+                    showSuccess();
+                });
+            } else {
+                // Fallback if URL is not set
+                showSuccess();
+            }
+        });
+
+        function showSuccess() {
             form.style.display = 'none';
             thankYou.style.display = 'block';
-
             triggerDownload();
-        });
+        }
 
         UIkit.util.on('#download-modal', 'hide', () => {
             if (form.style.display === 'none') {
                 setTimeout(() => {
                     form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'Access Report';
                     form.style.display = 'block';
                     thankYou.style.display = 'none';
                 }, 500);
