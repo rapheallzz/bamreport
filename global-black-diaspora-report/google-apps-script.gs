@@ -2,7 +2,7 @@
  * Google Apps Script for "Global Black Diaspora Report" Lead Capture
  *
  * Instructions:
- * 1. Open your Google Spreadsheet: https://docs.google.com/spreadsheets/d/1x3L5e7GAMfYcCRRoILDKmZlwxjAf0oV2nL_mXhdcRnU/edit
+ * 1. Open your Google Spreadsheet: https://docs.google.com/spreadsheets/d/1hcVP6PSv-8fY1VIfwNBR2lovp3uPv1cxKTWPwZgWfWE/edit
  * 2. Go to Extensions > Apps Script.
  * 3. Delete any existing code and paste this script.
  * 4. Click the "Save" (disk icon) and name it "Report Lead Handler".
@@ -31,8 +31,10 @@ function doPost(e) {
         "Email",
         "Company",
         "Role",
-        "Industry",
-        "Area of Interest"
+        "Industry / Request Type",
+        "Area of Interest / Inquiry",
+        "Org Type",
+        "Message"
       ]);
     }
 

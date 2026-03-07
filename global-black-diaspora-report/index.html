@@ -432,7 +432,7 @@
         });
 
         function submitToGAS(data, callback) {
-            if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbyLFS5KUUReSXVdp_wSKkfkATNkLWhsENxJJ19Gk12HDUkSKc1LIdhshVKpO5A-52uZrA/exec') {
+            if (SCRIPT_URL) {
                 fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
