@@ -1,110 +1,146 @@
 /**
- * Google Apps Script for "Global Black Diaspora Report" Lead Capture
+ * Google Apps Script for Global Black Diaspora Report & Briefing Requests
  *
- * This script handles both "Report Download" and "Executive Briefing" submissions.
- * It dynamically maps fields to spreadsheet columns based on headers.
+ * Features:
+ * - Dynamic Column Mapping: Automatically finds the correct column based on header names (fuzzy matching).
+ * - Multi-form Support: Handles both "Download Report" and "Executive Briefing" submissions.
+ * - Auto-Initialization: Creates headers if the sheet is empty.
+ * - Email Notifications: Sends formatted alerts to sales@blackaudiencemarketplace.com.
  */
 
 function doPost(e) {
+  const LOCK = LockService.getScriptLock();
   try {
-    var data = JSON.parse(e.postData.contents);
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    // Prevent concurrent write issues
+    LOCK.waitLock(30000);
 
-    // Define the canonical headers for a new sheet
-    var canonicalHeaders = [
-      "Timestamp",
-      "Submission Type",
-      "First Name",
-      "Last Name",
-      "Email",
-      "Company",
-      "Role / Title",
-      "Industry / Org Type",
-      "Interest / Inquiry",
-      "Message"
-    ];
+    const data = JSON.parse(e.postData.contents);
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
-    // Initialize sheet with headers if empty
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(canonicalHeaders);
+    // Define our standard fields and their fuzzy matching patterns
+    const fieldMapping = {
+      'timestamp': [/timestamp/i, /time/i],
+      'type': [/type/i, /form/i, /request/i],
+      'firstName': [/first.*name/i, /fname/i],
+      'lastName': [/last.*name/i, /lname/i],
+      'email': [/email/i, /e-mail/i],
+      'company': [/company/i, /org/i, /organization/i],
+      'role': [/role/i, /title/i, /job/i, /position/i],
+      'industry': [/industry/i, /sector/i, /org.*type/i],
+      'interest': [/interest/i, /area/i, /topic/i, /inquiry.*type/i],
+      'message': [/message/i, /note/i, /comment/i, /briefly/i]
+    };
+
+    // Initialize mapped data with defaults
+    const mappedData = {};
+    for (const key in fieldMapping) {
+      mappedData[key] = "";
+    }
+    mappedData['timestamp'] = data.timestamp || new Date().toISOString();
+    mappedData['type'] = data.type || "unknown";
+
+    // Improved mapping: Match incoming JSON keys against our patterns
+    for (const incomingKey in data) {
+      for (const internalKey in fieldMapping) {
+        // Skip timestamp/type as we handled them specifically or want to prioritize incoming
+        if (internalKey === 'timestamp' || internalKey === 'type') {
+           if (data[incomingKey]) mappedData[internalKey] = data[incomingKey];
+           continue;
+        }
+        const patterns = fieldMapping[internalKey];
+        if (patterns.some(p => p.test(incomingKey))) {
+          mappedData[internalKey] = data[incomingKey];
+          break;
+        }
+      }
     }
 
-    // Get current headers from the sheet to ensure correct mapping
-    var currentHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-    // Map incoming data to columns based on header text
-    var rowData = currentHeaders.map(function(header) {
-      var h = header.trim();
-      var hLower = h.toLowerCase();
-
-      // Timestamp
-      if (hLower.includes("timestamp")) return data.timestamp || new Date().toISOString();
-
-      // Submission Type
-      if (hLower === "type" || hLower === "submission type") return data.type || "";
-
-      // Name fields
-      if (hLower.includes("first name")) return data.firstName || "";
-      if (hLower.includes("last name")) return data.lastName || "";
-
-      // Email
-      if (hLower.includes("email")) return data.email || "";
-
-      // Company
-      if (hLower === "company" || h === "Company / Organization") return data.company || "";
-
-      // Role
-      if (hLower.includes("role") || hLower.includes("title")) return data.role || "";
-
-      // Industry / Org Type
-      if (hLower.includes("industry") || hLower.includes("org type") || h === "Organization Type") {
-        return data.industry || data.orgType || "";
+    // 1. Spreadsheet Logging
+    const headers = findOrCreateHeaders(sheet, Object.keys(fieldMapping));
+    const newRow = headers.map(header => {
+      for (const key in fieldMapping) {
+        const patterns = fieldMapping[key];
+        if (patterns.some(p => p.test(header))) {
+          return mappedData[key] || "";
+        }
       }
-
-      // Interest / Inquiry Type
-      if (hLower.includes("interest") || hLower.includes("inquiry")) {
-        return data.interest || data.inquiryType || "";
-      }
-
-      // Message
-      if (hLower.includes("message") || hLower.includes("tell us briefly")) return data.message || "";
-
-      return "";
+      return ""; // Column not in our mapping
     });
 
-    sheet.appendRow(rowData);
+    sheet.appendRow(newRow);
 
-    // 2. Send Email Notification
-    var recipient = "sales@blackaudiencemarketplace.com";
-    var isBriefing = data.type === "briefing";
-    var subject = (isBriefing ? "Briefing Request: " : "New Report Download: ") + data.firstName + " " + data.lastName;
-
-    var body = (isBriefing ? "A new executive briefing request has been submitted." : "A new user has downloaded the Global Black Diaspora Report.") + "\n\n" +
-               "Details:\n" +
-               "----------------------------------\n" +
-               "Submission Type: " + (data.type === "briefing" ? "Executive Briefing" : "Report Download") + "\n" +
-               "Name: " + data.firstName + " " + data.lastName + "\n" +
-               "Email: " + data.email + "\n" +
-               "Company: " + (data.company || "N/A") + "\n" +
-               "Role / Title: " + (data.role || "N/A") + "\n" +
-               "Industry / Org Type: " + (data.industry || data.orgType || "N/A") + "\n" +
-               "Interest / Inquiry Type: " + (data.interest || data.inquiryType || "N/A") + "\n";
-
-    if (data.message) {
-      body += "Message: " + data.message + "\n";
-    }
-
-    body += "Timestamp: " + (data.timestamp || new Date().toISOString()) + "\n" +
-            "----------------------------------\n\n" +
-            "This data has been added to your Google Spreadsheet.";
-
-    MailApp.sendEmail(recipient, subject, body);
+    // 2. Email Notification
+    sendEmailNotification(mappedData);
 
     return ContentService.createTextOutput(JSON.stringify({ "result": "success" }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
+    console.error('Submission Error:', error);
     return ContentService.createTextOutput(JSON.stringify({ "result": "error", "error": error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    LOCK.releaseLock();
   }
+}
+
+/**
+ * Ensures the spreadsheet has the correct headers and returns the current header list.
+ */
+function findOrCreateHeaders(sheet, expectedKeys) {
+  let headers = [];
+  if (sheet.getLastRow() > 0) {
+    headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  }
+
+  if (headers.length === 0) {
+    // Mapping for user-friendly header names
+    const headerNames = {
+      'timestamp': 'Timestamp',
+      'type': 'Form Type',
+      'firstName': 'First Name',
+      'lastName': 'Last Name',
+      'email': 'Email',
+      'company': 'Company',
+      'role': 'Role / Title',
+      'industry': 'Industry / Org Type',
+      'interest': 'Interest / Inquiry',
+      'message': 'Message'
+    };
+    headers = expectedKeys.map(key => headerNames[key] || key);
+    sheet.appendRow(headers);
+  }
+  return headers;
+}
+
+/**
+ * Sends a formatted email notification based on the form type.
+ */
+function sendEmailNotification(data) {
+  const recipient = "sales@blackaudiencemarketplace.com";
+  const isBriefing = data.type === "briefing";
+
+  const subject = isBriefing
+    ? "Executive Briefing Request: " + data.firstName + " " + data.lastName
+    : "New Report Download: " + data.firstName + " " + data.lastName;
+
+  const intro = isBriefing
+    ? "A new executive briefing has been requested regarding the Global Black Diaspora Report."
+    : "A new user has downloaded the Global Black Diaspora Report.";
+
+  const body = intro + "\n\n" +
+               "Details:\n" +
+               "----------------------------------\n" +
+               "Name: " + data.firstName + " " + data.lastName + "\n" +
+               "Email: " + data.email + "\n" +
+               "Company: " + (data.company || "N/A") + "\n" +
+               "Role: " + (data.role || "N/A") + "\n" +
+               "Industry/Org Type: " + (data.industry || "N/A") + "\n" +
+               "Interest/Inquiry: " + (data.interest || "N/A") + "\n" +
+               "Message: " + (data.message || "N/A") + "\n" +
+               "Timestamp: " + data.timestamp + "\n" +
+               "----------------------------------\n\n" +
+               "View full data here: " + SpreadsheetApp.getActiveSpreadsheet().getUrl();
+
+  MailApp.sendEmail(recipient, subject, body);
 }
